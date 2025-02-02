@@ -17,20 +17,26 @@
         android:layout_marginTop="50dp"
         app:srcCompat="@drawable/logo" />
 
-    <android.inputmethodservice.ExtractEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/login_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginTop"
         android:padding="12dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:enabled="true"
         android:hint="@string/email" />
 
-    <android.inputmethodservice.ExtractEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
         android:padding="12dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:enabled="true"
         android:inputType="textPassword" />
 
     <com.google.android.material.button.MaterialButton
@@ -51,5 +57,31 @@
         app:layout_constraintTop_toBottomOf="@+id/login_loginButton"
         app:layout_constraintEnd_toEndOf="@+id/login_loginButton" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_googleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/sign_in_with_google"
+        app:iconGravity="textStart"
+        app:iconPadding="12dp"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_phoneButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/sign_in_with_phone"
+        app:iconGravity="textStart"
+        app:iconPadding="12dp"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@color/white" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

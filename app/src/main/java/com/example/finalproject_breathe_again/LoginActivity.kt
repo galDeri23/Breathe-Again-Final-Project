@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject_breathe_again.databinding.ActivityLoginBinding
-import com.example.finalproject_breathe_again.databinding.ActivityMainBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -27,7 +26,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.loginLoginButton.setOnClickListener {
             val email = binding.loginEmail.text.toString()
             val password = binding.loginPassword.text.toString()
@@ -42,12 +40,45 @@ class LoginActivity : AppCompatActivity() {
                 signInWithEmailAndPassword(email, password)
             }
         }
-
-
-        binding.loginSignup.setOnClickListener {
-            //val intent = Intent(this, SignUpActivity::class.java)
-            //startActivity(intent)
+        binding.loginGoogleButton.setOnClickListener {
+            signInWithGoogle()
         }
+        binding.loginPhoneButton.setOnClickListener {
+            signInWithPhone()
+        }
+        binding.loginSignup.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    private fun signInWithPhone() {
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.PhoneBuilder().build()
+        )
+
+        val signInIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .setLogo(R.drawable.logo)
+            .build()
+
+        signInLauncher.launch(signInIntent)
+    }
+
+    private fun signInWithGoogle() {
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.GoogleBuilder().build()
+        )
+
+        val signInIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .setLogo(R.drawable.logo)
+            .build()
+
+        signInLauncher.launch(signInIntent)
     }
 
     private fun signInWithEmailAndPassword(email: String, password: String) {
@@ -63,21 +94,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
-
-    private fun signIn() {
-        val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.PhoneBuilder().build()
-        )
-
-        val signInIntent = AuthUI.getInstance()
-            .createSignInIntentBuilder()
-            .setAvailableProviders(providers)
-            .setLogo(R.drawable.logo)
-            .build()
-        signInLauncher.launch(signInIntent)
-    }
-
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse

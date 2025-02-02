@@ -60,7 +60,9 @@ dependencies {
 
     // Firebase authentication
     implementation (libs.firebase.ui.auth)
+    implementation (libs.firebase.auth)
 
-
+    // Firebase FireStore
+    implementation (libs.firebase.firestore)
 
 }

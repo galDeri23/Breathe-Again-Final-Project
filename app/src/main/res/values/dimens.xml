@@ -5,4 +5,5 @@
     <dimen name="marginTop">30dp</dimen>
     <dimen name="defaultMargin">16dp</dimen>
     <dimen name="textSize">16sp</dimen>
+    <dimen name="textsize">24sp</dimen>
 </resources>
