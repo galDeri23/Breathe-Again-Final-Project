@@ -3,5 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="marginTop">30dp</dimen>
-    <dimen name="pedding_difualt">16dp</dimen>
+    <dimen name="defaultMargin">16dp</dimen>
+    <dimen name="textSize">16sp</dimen>
 </resources>

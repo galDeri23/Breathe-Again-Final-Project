@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/pedding_difualt"
+    android:padding="@dimen/defaultMargin"
     android:background="@color/green"
     tools:context=".LoginActivity">
 
@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginTop"
+        android:padding="12dp"
         android:hint="@string/email" />
 
     <android.inputmethodservice.ExtractEditText
@@ -29,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
+        android:padding="12dp"
         android:inputType="textPassword" />
 
     <com.google.android.material.button.MaterialButton
@@ -36,6 +38,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/login_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:textSize="@dimen/textSize"
+        android:textColor="@color/purple_500"
+        android:layout_marginTop="@dimen/defaultMargin"
+        android:layout_marginEnd="@dimen/defaultMargin"
+        app:layout_constraintTop_toBottomOf="@+id/login_loginButton"
+        app:layout_constraintEnd_toEndOf="@+id/login_loginButton" />
 
 
 </LinearLayout>
