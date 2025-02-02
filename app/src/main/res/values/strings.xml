@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">FinalProject_Breathe_Again</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_craving">Craving</string>
+    <string name="title_share">Share</string>
     <string name="title_notifications">Notifications</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
@@ -15,4 +16,7 @@
     <string name="sing_up">Sign Up</string>
     <string name="sign_in_with_phone">Sign in with Phone</string>
     <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="days_smoke_free">Days Smoke-Free:</string>
+    <string name="money_saved">Money Saved:</string>
+    <string name="craving">CRAVING</string>
 </resources>
