@@ -1,0 +1,87 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:padding="16dp">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Craving Management"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#455A64" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_marginTop="@dimen/defaultMargin"
+        android:layout_centerHorizontal="true"
+        android:text="Manage Your Cravings"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:textColor="#6A6A6A" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_breathing"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_margin="@dimen/defaultMargin"
+        android:layout_below="@id/tv_subtitle"
+        android:backgroundTint="#E3F2FD"
+        android:text="@string/breathing_exercise"
+        android:textColor="#455A64"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/iconPadding_radius"
+        app:icon="@drawable/ic_breathing"
+        app:iconTint="@null"
+        app:iconGravity="start"
+        app:iconPadding="@dimen/iconPadding_radius"
+        app:iconSize="@dimen/iconSize" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_stories"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_margin="@dimen/defaultMargin"
+        android:layout_below="@id/btn_breathing"
+        android:backgroundTint="#E8F5E9"
+        android:text="Inspiring Stories"
+        android:textColor="#455A64"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/iconPadding_radius"
+        app:icon="@drawable/ic_stories"
+        app:iconTint="@null"
+        app:iconGravity="start"
+        app:iconPadding="@dimen/iconPadding_radius"
+        app:iconSize="@dimen/iconSize" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_challenge"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_margin="@dimen/defaultMargin"
+        android:layout_below="@id/btn_stories"
+        android:backgroundTint="#FFF3E0"
+        android:text="5-Minute Challenge"
+        android:textColor="#455A64"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/iconPadding_radius"
+        app:icon="@drawable/ic_challenge"
+        app:iconTint="@null"
+        app:iconGravity="start"
+        app:iconPadding="@dimen/iconPadding_radius"
+        app:iconSize="@dimen/iconSize" />
+</RelativeLayout>

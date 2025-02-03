@@ -12,14 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.finalproject_breathe_again.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_craving"
+        android:name="com.example.finalproject_breathe_again.ui.craving.CravingFragment"
+        android:label="@string/title_craving"
+        tools:layout="@layout/fragment_craving" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.finalproject_breathe_again.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_share"
+        android:name="com.example.finalproject_breathe_again.ui.notifications.NotificationsFragment"
+        android:label="@string/title_share"
+        tools:layout="@layout/fragment_share" />
 </navigation>
