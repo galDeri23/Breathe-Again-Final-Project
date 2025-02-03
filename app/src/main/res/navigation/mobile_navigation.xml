@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_share"
-        android:name="com.example.finalproject_breathe_again.ui.notifications.NotificationsFragment"
+        android:name="com.example.finalproject_breathe_again.ui.share.ShareFragment"
         android:label="@string/title_share"
         tools:layout="@layout/fragment_share" />
 </navigation>

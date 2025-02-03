@@ -28,10 +28,10 @@ class ShareFragment : Fragment() {
         _binding = FragmentShareBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textShare
-        cravingViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+       // val textView: TextView = binding.textShare
+       // cravingViewModel.text.observe(viewLifecycleOwner) {
+       //     textView.text = it
+       // }
         return root
     }
 

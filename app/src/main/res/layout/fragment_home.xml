@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layoutDirection="ltr"
+    >
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +22,7 @@
         android:textColor="@color/blue" />
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_days_free_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:progress="75"
+            android:max="365"
             android:indeterminate="false"
             android:progressDrawable="@drawable/circular_progress" />
 
@@ -87,6 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:progress="50"
+            android:max="1000"
             android:indeterminate="false"
             android:progressDrawable="@drawable/circular_progress" />
 
@@ -131,11 +135,19 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_reset"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:src="@drawable/reset"
+        android:contentDescription="@string/reset_button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:contentDescription="Reset Progress" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="72dp"
+        android:elevation="8dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true" />
 </RelativeLayout>

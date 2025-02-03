@@ -31,4 +31,5 @@
     <string name="delete_all">Delete All</string>
     <string name="notification_icon">Notification Icon</string>
     <string name="reminder">Reminder</string>
+    <string name="start_date">Start Date</string>
 </resources>
