@@ -39,7 +39,8 @@ class HomeViewModel : ViewModel() {
                 if (document.exists()) {
 
                     startDate = document.getLong("startDate") ?: 0L
-                    dailyCigarettes = document.getLong("cigarettes")?.toInt() ?: 0
+                    dailyCigarettes = document.getLong("cigarettes")?.toInt() ?: 10 // ✅ הגדרת ברירת מחדל (10)
+                    costPerCigarette = document.getDouble("costPerCigarette") ?: 2.0 // ✅ ברירת מחדל למחיר
 
                     if (startDate == 0L) {
                         Log.e("HomeViewModel", "Invalid start date in Firestore")
@@ -74,16 +75,13 @@ class HomeViewModel : ViewModel() {
     private fun calculateMoneySaved() {
         val days = _smokeFreeDays.value ?: 0
         if (days > 0 && dailyCigarettes > 0) {
-
             val savedMoney = days * dailyCigarettes * costPerCigarette
             _moneySaved.value = savedMoney
-
-
             saveMoneyToFirestore(savedMoney)
             Log.d("HomeViewModel", "Money Saved Calculated: $savedMoney")
         } else {
             _moneySaved.value = 0.0
-            Log.e("HomeViewModel", "Failed to calculate money saved: Invalid data")
+            Log.e("HomeViewModel", "Failed to calculate money saved: Invalid data (days=$days, dailyCigarettes=$dailyCigarettes)")
         }
     }
 

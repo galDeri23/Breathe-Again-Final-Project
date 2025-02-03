@@ -3,6 +3,7 @@ agp = "8.7.3"
 anychartAndroid = "1.1.2"
 facebookAndroidSdk = "8.x"
 firebaseBom = "33.7.0"
+firebaseDatabase = "21.0.0"
 firebaseFirestore = "24.6.1"
 firebaseUiAuth = "7.2.0"
 kotlin = "1.9.24"
@@ -28,6 +29,7 @@ facebook-android-sdk = { module = "com.facebook.android:facebook-android-sdk", v
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-database = { module = "com.google.firebase:firebase-database", version.ref = "firebaseDatabase" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestore" }
 firebase-ui-auth = { module = "com.firebaseui:firebase-ui-auth", version.ref = "firebaseUiAuth" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

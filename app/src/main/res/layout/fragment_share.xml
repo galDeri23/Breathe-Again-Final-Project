@@ -33,6 +33,17 @@
         android:scrollbars="vertical"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        tools:listitem="@layout/item_card"
+        tools:listitem="@layout/item_share"
         />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/no_achievements_to_display"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:textColor="@color/black" />
+
 </RelativeLayout>

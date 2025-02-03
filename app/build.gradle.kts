@@ -65,4 +65,6 @@ dependencies {
     // Firebase FireStore
     implementation (libs.firebase.firestore)
 
+    // Firebase realtime database
+    implementation (libs.firebase.database)
 }

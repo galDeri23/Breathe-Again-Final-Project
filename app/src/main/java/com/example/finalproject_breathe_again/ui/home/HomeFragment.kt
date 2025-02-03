@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.finalproject_breathe_again.R
 import com.example.finalproject_breathe_again.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
@@ -60,7 +61,14 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.navigation_craving)
             }
             binding.btnShare.setOnClickListener {
-                showShareOptions()
+                val days = homeViewModel.smokeFreeDays.value ?: 0
+                val money = homeViewModel.moneySaved.value ?: 0.0
+
+                if (days == 0 || money == 0.0) {
+                    Toast.makeText(context, "Wait until your data loads before sharing!", Toast.LENGTH_SHORT).show()
+                } else {
+                    showShareOptions()
+                }
             }
             binding.imgReset.setOnClickListener {
                 val currentUser = FirebaseAuth.getInstance().currentUser
@@ -130,23 +138,31 @@ class HomeFragment : Fragment() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
-            val db = FirebaseFirestore.getInstance()
+            val db = FirebaseDatabase.getInstance().getReference("shareItems")
 
-            val shareData = hashMapOf(
-                "userId" to userId,
-                "daysFree" to days,
-                "moneySaved" to money,
-                "timestamp" to System.currentTimeMillis()
-            )
+            val userRef = FirebaseFirestore.getInstance().collection("users").document(userId)
 
-            db.collection("shares").add(shareData)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "Shared successfully in the app!", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.navigation_share)
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(context, "Failed to share in the app: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
+            userRef.get().addOnSuccessListener { document ->
+                val username = document.getString("name") ?: "Anonymous"
+                val shareData = mapOf(
+                    "userId" to userId,
+                    "username" to username,
+                    "daysFree" to days,
+                    "moneySaved" to money,
+                    "timestamp" to System.currentTimeMillis()
+                )
+
+                db.push().setValue(shareData)  // ✅ שומר ב-Realtime Database
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Shared successfully!", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.navigation_share)
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(context, "Failed to share: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }.addOnFailureListener { e ->
+                Toast.makeText(context, "Failed to fetch user data: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
         } else {
             Toast.makeText(context, "User not logged in!", Toast.LENGTH_SHORT).show()
         }
