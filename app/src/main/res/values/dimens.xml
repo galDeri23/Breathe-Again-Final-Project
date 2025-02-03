@@ -6,4 +6,7 @@
     <dimen name="defaultMargin">16dp</dimen>
     <dimen name="textSize">16sp</dimen>
     <dimen name="textsize">24sp</dimen>
+    <dimen name="height_button">80dp</dimen>
+    <dimen name="iconSize">30dp</dimen>
+    <dimen name="iconPadding_radius">12dp</dimen>
 </resources>

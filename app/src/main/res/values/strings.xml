@@ -19,4 +19,16 @@
     <string name="days_smoke_free">Days Smoke-Free:</string>
     <string name="money_saved">Money Saved:</string>
     <string name="craving">CRAVING</string>
+    <string name="smoke_free_progress">🚀 Smoke-Free Progress</string>
+    <string name="_100">$100</string>
+    <string name="share_progress">Share Progress</string>
+    <string name="craving_button">craving button</string>
+    <string name="reset_button">reset button</string>
+    <string name="smoke_free_days_15">Smoke free days: 15</string>
+    <string name="money_saved_100">Money Saved: $100</string>
+    <string name="share_your_progress">SHARE YOUR PROGRESS</string>
+    <string name="breathing_exercise">Breathing Exercise</string>
+    <string name="delete_all">Delete All</string>
+    <string name="notification_icon">Notification Icon</string>
+    <string name="reminder">Reminder</string>
 </resources>

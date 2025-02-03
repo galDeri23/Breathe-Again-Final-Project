@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/defaultMargin"
-    android:background="@color/green"
+    android:background="@drawable/gradient_background"
     tools:context=".LoginActivity">
 
     <androidx.constraintlayout.utils.widget.ImageFilterView

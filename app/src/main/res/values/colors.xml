@@ -17,4 +17,8 @@
     <color name="light_green">#90EE90</color>
     <color name="light_gray">#D3D3D3</color>
     <color name="light_red">#F8BBD0</color>
+    <color name="light_purple">#D1C4E9</color>
+    <color name="bright_orange">#FFA726</color>
+    <color name="light_yellow">#FFEB3B</color>
+    <color name="dark_green">#388E3C</color>
 </resources>
