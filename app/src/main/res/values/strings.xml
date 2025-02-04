@@ -35,4 +35,5 @@
     <string name="no_achievements_to_display">No achievements to display</string>
     <string name="day_free">Day Free</string>
     <string name="save_money">Save Money</string>
+    <string name="log_out">Log Out</string>
 </resources>
