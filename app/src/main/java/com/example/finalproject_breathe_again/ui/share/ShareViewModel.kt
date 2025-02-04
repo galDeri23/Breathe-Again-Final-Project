@@ -24,32 +24,31 @@ class ShareViewModel : ViewModel() {
 
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val items = mutableListOf<ShareItem>()
-                for (child in snapshot.children) {
-                    val item = child.getValue(ShareItem::class.java)
-                    if (item != null) {
-                        items.add(item)
-                    }
-                }
-                Log.d("ShareViewModel", "Fetched ${items.size} items: $items")
+                val items = snapshot.children.mapNotNull { it.getValue(ShareItem::class.java) }
                 _shareItems.value = items
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e("ShareViewModel", "Error fetching data: ${error.message}")
+                Log.e("ShareViewModel", "Error fetching shares: ${error.message}")
             }
         })
     }
 
-    fun addShareItem(daysSmokeFree: Int, moneySaved: Double) {
+    fun addShareItem(daysSmokeFree: Int, moneySaved: Double, progressGraph: Int) {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
-            Log.d("ShareViewModel", "Adding new share item for user $userId")
+            val username = currentUser.displayName ?: "Anonymous"
 
-            val newItem = ShareItem(userId, daysSmokeFree, moneySaved)
-            val newItemKey = database.push().key  // יצירת מפתח ייחודי לכל פריט
+            val newItem = ShareItem(
+                username = username,
+                userId = userId,
+                daysFree = daysSmokeFree,
+                moneySaved = moneySaved,
+                progressGraph = progressGraph
+            )
 
+            val newItemKey = database.push().key
             if (newItemKey != null) {
                 database.child(newItemKey).setValue(newItem)
                     .addOnSuccessListener {

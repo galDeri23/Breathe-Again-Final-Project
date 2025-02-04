@@ -31,9 +31,7 @@ class ShareFragment : Fragment() {
 
         shareViewModel = ViewModelProvider(this)[ShareViewModel::class.java]
 
-
         shareViewModel.shareItems.observe(viewLifecycleOwner) { items ->
-            Log.d("ShareFragment", "Observed data change: $items")
             if (items.isEmpty()) {
                 binding.recyclerView.visibility = View.GONE
                 binding.tvNoData.visibility = View.VISIBLE

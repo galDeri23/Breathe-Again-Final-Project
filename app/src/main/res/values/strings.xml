@@ -19,7 +19,7 @@
     <string name="days_smoke_free">Days Smoke-Free:</string>
     <string name="money_saved">Money Saved:</string>
     <string name="craving">CRAVING</string>
-    <string name="smoke_free_progress">🚀 Smoke-Free Progress</string>
+    <string name="breathe_again_progress">🚀 Breathe Again Progress</string>
     <string name="_100">$100</string>
     <string name="share_progress">Share Progress</string>
     <string name="craving_button">craving button</string>
@@ -33,4 +33,6 @@
     <string name="reminder">Reminder</string>
     <string name="start_date">Start Date</string>
     <string name="no_achievements_to_display">No achievements to display</string>
+    <string name="day_free">Day Free</string>
+    <string name="save_money">Save Money</string>
 </resources>

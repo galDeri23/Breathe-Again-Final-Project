@@ -18,21 +18,26 @@ class ShareAdapter : ListAdapter<ShareItem, ShareAdapter.ShareViewHolder>(DiffCa
 
     override fun onBindViewHolder(holder: ShareViewHolder, position: Int) {
         val item = getItem(position)
-        Log.d("ShareAdapter", "Binding item at position $position: $item")
         holder.bind(item)
     }
 
     class ShareViewHolder(private val binding: ItemShareBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ShareItem) {
+
             binding.tvUsername.text = item.username
-            binding.tvDetails.text = "${item.daysSmokeFree} Days Smoke-Free\n\$${item.moneySaved} Saved"
-            Log.d("ShareViewHolder", "Bound item: $item")
+
+            binding.tvDetails.text = "${item.daysFree} Days Smoke-Free\n\$${item.moneySaved} Saved"
+
+            binding.circularProgress.apply {
+                progress = item.progressGraph
+                max = 100
+            }
         }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<ShareItem>() {
         override fun areItemsTheSame(oldItem: ShareItem, newItem: ShareItem): Boolean {
-            return oldItem.username == newItem.username
+            return oldItem.userId == newItem.userId
         }
 
         override fun areContentsTheSame(oldItem: ShareItem, newItem: ShareItem): Boolean {

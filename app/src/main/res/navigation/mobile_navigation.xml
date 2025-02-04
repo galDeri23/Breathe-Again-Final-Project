@@ -5,17 +5,26 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
+
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.finalproject_breathe_again.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_craving"
         android:name="com.example.finalproject_breathe_again.ui.craving.CravingFragment"
         android:label="@string/title_craving"
-        tools:layout="@layout/fragment_craving" />
+        tools:layout="@layout/fragment_craving">
+
+
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -23,9 +32,11 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
+
     <fragment
         android:id="@+id/navigation_share"
         android:name="com.example.finalproject_breathe_again.ui.share.ShareFragment"
         android:label="@string/title_share"
         tools:layout="@layout/fragment_share" />
+
 </navigation>

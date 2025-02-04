@@ -1,5 +1,9 @@
 package com.example.finalproject_breathe_again.ui.home
 
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +18,8 @@ import com.example.finalproject_breathe_again.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import android.provider.MediaStore
+import androidx.navigation.NavOptions
 
 class HomeFragment : Fragment() {
 
@@ -41,24 +47,42 @@ class HomeFragment : Fragment() {
             homeViewModel.loadUserData(userId)
 
             homeViewModel.smokeFreeDays.observe(viewLifecycleOwner) { days ->
-                binding.tvDaysValue.text = "$days"
-                val maxDays = binding.progressCircularDays.max
-                binding.progressCircularDays.progress = minOf(days, maxDays)
+                binding.tvDaysValue.text = days.toString()
+
+
+                val maxDays = 30
+                binding.progressCircularDays.max = maxDays
+
+
+                binding.progressCircularDays.progress = days.coerceAtMost(maxDays)
+
+                if (days >= maxDays) {
+                    Toast.makeText(context, "Congratulations! You've passed your goal!", Toast.LENGTH_SHORT).show()
+                }
             }
 
             homeViewModel.moneySaved.observe(viewLifecycleOwner) { money ->
-                "$${String.format("%.2f", money)}".also { binding.tvMoneyValue.text = it }
-                val maxMoney = binding.progressCircularMoney.max
-                binding.progressCircularMoney.progress = minOf(money.toInt(), maxMoney)
-            }
+                binding.tvMoneyValue.text = "$${String.format("%.2f", money)}"
 
+                val maxMoney = 1000
+                binding.progressCircularMoney.max = maxMoney
+
+
+                binding.progressCircularMoney.progress = money.toInt().coerceAtMost(maxMoney)
+            }
 
             homeViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
                 binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
             }
 
             binding.btnCraving.setOnClickListener {
-                findNavController().navigate(R.id.navigation_craving)
+                findNavController().navigate(
+                    R.id.navigation_craving,
+                    null,
+                    NavOptions.Builder()
+                        .setPopUpTo(R.id.navigation_home, inclusive = false)
+                        .build()
+                )
             }
             binding.btnShare.setOnClickListener {
                 val days = homeViewModel.smokeFreeDays.value ?: 0
@@ -126,12 +150,37 @@ class HomeFragment : Fragment() {
     }
 
     private fun shareOnSocialMedia(days: Int, money: Double) {
-        val shareText = "I've been breathe again for $days days and saved $$money so far! Join me in this journey!"
-        val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
-            type = "text/plain"
-            putExtra(android.content.Intent.EXTRA_TEXT, shareText)
+        val shareText = "I've been breathe again for $days days and saved $${String.format("%.2f", money)}! Join me in this journey!"
+
+        val bitmap = createGraphBitmap()
+
+        val path = MediaStore.Images.Media.insertImage(
+            requireContext().contentResolver,
+            bitmap,
+            "Smoke-Free Progress",
+            null
+        )
+
+        val uri = Uri.parse(path)
+
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "image/*"
+            putExtra(Intent.EXTRA_TEXT, shareText)
+            putExtra(Intent.EXTRA_STREAM, uri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        startActivity(android.content.Intent.createChooser(intent, "Share your progress"))
+
+        startActivity(Intent.createChooser(intent, "Share your progress"))
+    }
+
+
+    private fun createGraphBitmap(): Bitmap {
+        //function to create a bitmap of the graph
+        val view = binding.progressCircularDays
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
     }
 
     private fun shareInApp(days: Int, money: Double) {
@@ -144,28 +193,40 @@ class HomeFragment : Fragment() {
 
             userRef.get().addOnSuccessListener { document ->
                 val username = document.getString("name") ?: "Anonymous"
-                val shareData = mapOf(
-                    "userId" to userId,
-                    "username" to username,
-                    "daysFree" to days,
-                    "moneySaved" to money,
-                    "timestamp" to System.currentTimeMillis()
-                )
 
-                db.push().setValue(shareData)  // ✅ שומר ב-Realtime Database
-                    .addOnSuccessListener {
-                        Toast.makeText(context, "Shared successfully!", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.navigation_share)
-                    }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(context, "Failed to share: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
+                if (days > 0) {
+                    val shareData = mapOf(
+                        "userId" to userId,
+                        "username" to username,
+                        "daysFree" to days,
+                        "moneySaved" to money,
+                        "progressGraph" to calculateProgressPercentage(days),
+                        "timestamp" to System.currentTimeMillis()
+                    )
+
+                    db.push().setValue(shareData)
+                        .addOnSuccessListener {
+                            Toast.makeText(context, "Shared successfully!", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.navigation_share)
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(context, "Failed to share: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Toast.makeText(context, "No valid progress to share.", Toast.LENGTH_SHORT).show()
+                }
             }.addOnFailureListener { e ->
                 Toast.makeText(context, "Failed to fetch user data: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(context, "User not logged in!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+
+    private fun calculateProgressPercentage(days: Int): Int {
+        val maxDays = binding.progressCircularDays.max
+        return (days * 100) / maxDays
     }
 
     override fun onDestroyView() {

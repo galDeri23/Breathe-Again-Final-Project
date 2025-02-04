@@ -34,31 +34,37 @@ class HomeViewModel : ViewModel() {
         this.userId = userId
         val db = FirebaseFirestore.getInstance()
 
-        db.collection("users").document(userId).get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-
-                    startDate = document.getLong("startDate") ?: 0L
-                    dailyCigarettes = document.getLong("cigarettes")?.toInt() ?: 10 // ✅ הגדרת ברירת מחדל (10)
-                    costPerCigarette = document.getDouble("costPerCigarette") ?: 2.0 // ✅ ברירת מחדל למחיר
-
-                    if (startDate == 0L) {
-                        Log.e("HomeViewModel", "Invalid start date in Firestore")
-                    } else {
-                        calculateSmokeFreeDays()
-                        calculateMoneySaved()
-                    }
-
-                    _loading.value = false
-                } else {
-                    Log.e("HomeViewModel", "Document does not exist in Firestore")
-                    _loading.value = false
-                }
+        // Listener to track real-time updates from Firestore
+        db.collection("users").document(userId).addSnapshotListener { document, exception ->
+            if (exception != null) {
+                Log.e("HomeViewModel", "Error listening for updates: ${exception.message}")
+                _loading.value = false
+                return@addSnapshotListener
             }
-            .addOnFailureListener { exception ->
-                Log.e("HomeViewModel", "Error loading user data: ${exception.message}")
+
+            if (document != null && document.exists()) {
+                startDate = document.getLong("startDate") ?: 0L
+                dailyCigarettes = document.getLong("cigarettes")?.toInt() ?: 10 // Default to 10 cigarettes/day
+                costPerCigarette = document.getDouble("costPerCigarette") ?: 2.0 // Default price per cigarette
+
+                if (startDate == 0L) {
+                    Log.e("HomeViewModel", "Invalid start date in Firestore, setting default value")
+                    startDate = System.currentTimeMillis() // Fallback value
+                }
+
+                // Update progress based on new data
+                updateProgress()
+                _loading.value = false
+            } else {
+                Log.e("HomeViewModel", "Document does not exist")
                 _loading.value = false
             }
+        }
+    }
+
+    private fun updateProgress() {
+        calculateSmokeFreeDays()
+        calculateMoneySaved()
     }
 
     private fun calculateSmokeFreeDays() {
