@@ -54,7 +54,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.androidx.constraintlayout.v214)
-    implementation (libs.material.v190)      
+    implementation (libs.material.v190)
+
+    //Message scheduling
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation (libs.androidx.work.runtime.ktx.v281)
 
     // Firebase
     implementation(platform(libs.firebase.bom))

@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.finalproject_breathe_again.utilities.DateUtilities
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.concurrent.TimeUnit
 
@@ -69,7 +70,7 @@ class HomeViewModel : ViewModel() {
 
     private fun calculateSmokeFreeDays() {
         if (startDate > 0) {
-            val days = TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - startDate).toInt()
+            val days = DateUtilities.calculateDaysBetween(startDate)
             _smokeFreeDays.value = days
             Log.d("HomeViewModel", "Smoke-Free Days Calculated: $days")
         } else {

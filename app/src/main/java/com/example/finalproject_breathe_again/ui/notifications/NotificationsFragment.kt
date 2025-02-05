@@ -1,6 +1,7 @@
 package com.example.finalproject_breathe_again.ui.notifications
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,27 +51,24 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        // Observe the list of notifications
         viewModel.notifications.observe(viewLifecycleOwner, Observer { notifications ->
-            if (notifications.isNotEmpty()) {
+            Log.d("NotificationsFragment", "Received notifications: ${notifications.size}")
+            notifications.forEach { notification ->
+                Log.d("NotificationsFragment", "Notification: title=${notification.title}, description=${notification.description}, date=${notification.date}")
+            }
+
+            if (!notifications.isNullOrEmpty()) {
+                val sortedNotifications = notifications.sortedByDescending { it.date }
+                notificationAdapter.updateNotifications(sortedNotifications)
+
                 notificationAdapter.updateNotifications(notifications)
                 binding.recyclerNotifications.visibility = View.VISIBLE
             } else {
+                binding.recyclerNotifications.visibility = View.GONE
                 Toast.makeText(requireContext(), "No notifications to display", Toast.LENGTH_SHORT).show()
             }
         })
-
-        // Observe loading state
-        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
-            binding.recyclerNotifications.visibility = if (isLoading) View.GONE else View.VISIBLE
-        })
-
-        // Observe error messages
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
-            errorMessage?.let {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-            }
-        })
+        viewModel.fetchNotificationsInRealtime()
     }
 
     override fun onDestroyView() {

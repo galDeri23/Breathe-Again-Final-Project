@@ -45,8 +45,21 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toEndOf="@id/img_notification_icon"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_notification_date" />
+
+            <!-- Date -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_notification_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintTop_toTopOf="@id/tv_notification_title"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <!-- Description -->
@@ -65,19 +78,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_notification_title"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Date -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_notification_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Today"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                android:textColor="@color/dark_gray"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/img_delete_notification" />
-
             <!-- Delete Button -->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_delete_notification"
@@ -85,7 +85,7 @@
                 android:layout_height="24dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/delete"
-                app:layout_constraintTop_toBottomOf="@id/tv_notification_date"
+                app:layout_constraintTop_toBottomOf="@id/tv_notification_description"
                 app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

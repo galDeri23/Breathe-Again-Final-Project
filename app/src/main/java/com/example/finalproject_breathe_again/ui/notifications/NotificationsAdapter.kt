@@ -1,5 +1,7 @@
 package com.example.finalproject_breathe_again.ui.notifications
 
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +11,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject_breathe_again.R
-import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Date
+import java.util.Locale
 
 class NotificationsAdapter(
     private val notificationsList: MutableList<Notification>,
@@ -35,11 +38,12 @@ class NotificationsAdapter(
 
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
         val notification = notificationsList[position]
+        Log.d("NotificationsAdapter", "Binding notification at position $position: title=${notification.title}, description=${notification.description}, date=${notification.date}")
 
-        // Set data
+        // Set data with formatted date
         holder.tvNotificationTitle.text = notification.title
         holder.tvNotificationDescription.text = notification.description
-        holder.tvNotificationDate.text = notification.date
+        holder.tvNotificationDate.text = formatDate(notification.date)
 
         // Handle delete button click
         holder.imgDeleteNotification.setOnClickListener {
@@ -65,12 +69,29 @@ class NotificationsAdapter(
     }
 
 
+    private fun formatDate(date: String): String {
+        return when (date.lowercase(Locale.getDefault())) {
+            "today" -> {
+                val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                formatter.format(Date())
+            }
+            "yesterday" -> {
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DAY_OF_MONTH, -1)
+                val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                formatter.format(calendar.time)
+            }
+            else -> date
+        }
+    }
+
     override fun getItemCount(): Int = notificationsList.size
 
     // Helper function to update notifications
     fun updateNotifications(newList: List<Notification>) {
         notificationsList.clear()
         notificationsList.addAll(newList)
+        Log.d("NotificationsAdapter", "Updated notifications: ${notificationsList.size}")
         notifyDataSetChanged()
     }
 }

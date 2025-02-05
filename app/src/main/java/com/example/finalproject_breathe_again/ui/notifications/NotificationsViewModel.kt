@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.finalproject_breathe_again.ui.notifications.Notification
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -26,11 +25,9 @@ class NotificationsViewModel : ViewModel() {
     private fun loadNotifications() {
         _loading.value = true
 
-        // גישה ל-Firestore
         val firestore = FirebaseFirestore.getInstance()
         val currentUser = FirebaseAuth.getInstance().currentUser
 
-        // בדיקה אם המשתמש מחובר
         if (currentUser == null) {
             _errorMessage.postValue("User is not logged in.")
             _loading.postValue(false)
@@ -42,27 +39,47 @@ class NotificationsViewModel : ViewModel() {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 val notifications = querySnapshot.documents.mapNotNull { document ->
-                    document.toObject(Notification::class.java)
+                    document.toObject(Notification::class.java)?.copy(
+                        id = document.id,
+                        date = document.getString("date") ?: "Unknown date" // שימוש בתאריך מהמסמך
+                    )
                 }
-
                 _notifications.postValue(notifications)
                 _loading.postValue(false)
             }
             .addOnFailureListener { exception ->
                 _errorMessage.postValue("Failed to load notifications: ${exception.message}")
+                Log.e("NotificationsViewModel", "Error: ${exception.message}")
                 _loading.postValue(false)
             }
-    }
 
+    }
+    fun fetchNotificationsInRealtime() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        FirebaseFirestore.getInstance()
+            .collection("notifications")
+            .whereEqualTo("userId", userId)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    _errorMessage.value = "Failed to listen to notifications: ${error.message}"
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null && !snapshot.isEmpty) {
+                    val notifications = snapshot.toObjects(Notification::class.java)
+                    _notifications.value = notifications
+                } else {
+                    _notifications.value = emptyList()
+                }
+            }
+    }
     fun deleteNotification(notification: Notification) {
         val firestore = FirebaseFirestore.getInstance()
 
-        // Delete notification from Firestore
         firestore.collection("notifications")
             .document(notification.id)
             .delete()
             .addOnSuccessListener {
-                // Update local list in ViewModel
                 val updatedList = _notifications.value?.toMutableList()?.apply {
                     remove(notification)
                 } ?: emptyList()
