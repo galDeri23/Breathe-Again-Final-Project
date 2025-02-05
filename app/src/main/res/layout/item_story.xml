@@ -108,7 +108,7 @@
                 android:layout_marginTop="@dimen/data_margin"
                 android:layout_marginEnd="@dimen/data_margin"
                 android:minLines="1"
-                android:maxLines="3"
+                android:maxLines="2"
                 android:textSize="@dimen/default_text_size"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, vestibulum mi id, ultricies nunc. Nulla facilisi. Nullam nec nunc nec nunc ultricies nunc. Nulla facilisi. Nullam nec nunc nec nunc ultricies nunc."
                 />

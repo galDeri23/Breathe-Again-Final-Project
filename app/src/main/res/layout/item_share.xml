@@ -1,8 +1,8 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="12dp"
     android:background="@android:color/transparent">
 
@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/light_purple"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -41,7 +41,7 @@
                 android:id="@+id/tv_username"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="User A"
+                tools:text="User A"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -56,7 +56,7 @@
                 android:id="@+id/tv_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="10 Days Smoke-Free\n$50 Saved"
+                tools:text="10 Days Smoke-Free\n$50 Saved"
                 android:textSize="14sp"
                 android:lineSpacingExtra="4dp"
                 android:textColor="@color/dark_gray"

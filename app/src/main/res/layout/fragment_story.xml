@@ -3,16 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/gradient_background"
     tools:context=".ui.craving.story.StoryFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Inspirational Stories"
+        android:text="@string/inspirational_stories"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/blue"
+        android:textColor="@color/black"
         android:layout_centerHorizontal="true"
         android:drawablePadding="8dp" />
 

@@ -23,6 +23,10 @@
         <action
             android:id="@+id/action_cravingFragment_to_storyFragment"
             app:destination="@id/storyFragment"/>
+        <action
+            android:id="@+id/action_cravingFragment_to_breathingFragment"
+            app:destination="@id/breathingFragment"/>
+
 
     </fragment>
 
@@ -45,5 +49,11 @@
         android:name="com.example.finalproject_breathe_again.ui.craving.story.StoryFragment"
         android:label="Inspiring Stories"
         tools:layout="@layout/fragment_story" />
+
+    <fragment
+        android:id="@+id/breathingFragment"
+        android:name="com.example.finalproject_breathe_again.ui.craving.breathing.BreathingFragment"
+        android:label="Breathing Exercise"
+        tools:layout="@layout/fragment_breathing" />
 
 </navigation>

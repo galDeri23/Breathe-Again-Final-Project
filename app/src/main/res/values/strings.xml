@@ -39,4 +39,10 @@
     <string name="craving_management">Craving Management</string>
     <string name="manage_your_cravings">Manage Your Cravings</string>
     <string name="inspiring_stories">Inspiring Stories</string>
+    <string name="start_exercise">Start Exercise</string>
+    <string name="inhale">Inhale</string>
+    <string name="stop_exercise">stop exercise</string>
+    <string name="breathe_your_way_to_freedom">Breathe Your Way to Freedom</string>
+    <string name="inspirational_stories">Inspirational Stories</string>
+    <string name="all_achievements">All Achievements</string>
 </resources>

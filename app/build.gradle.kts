@@ -56,6 +56,9 @@ dependencies {
     implementation (libs.androidx.constraintlayout.v214)
     implementation (libs.material.v190)
 
+    //lottie
+    implementation (libs.lottie)
+
     //Glide
     implementation (libs.glide)
 

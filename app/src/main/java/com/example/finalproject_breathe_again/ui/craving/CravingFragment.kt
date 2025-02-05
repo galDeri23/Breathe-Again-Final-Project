@@ -31,9 +31,9 @@ class CravingFragment : Fragment() {
             findNavController().navigate(R.id.action_cravingFragment_to_storyFragment)
         }
 
-        //binding.buttonBreathing.setOnClickListener {
-          //  findNavController().navigate(R.id.action_cravingFragment_to_breathingFragment)
-       // }
+        binding.btnBreathing.setOnClickListener {
+            findNavController().navigate(R.id.action_cravingFragment_to_breathingFragment)
+        }
 
        // binding.buttonChallenge.setOnClickListener {
           //  findNavController().navigate(R.id.action_cravingFragment_to_challengeFragment)

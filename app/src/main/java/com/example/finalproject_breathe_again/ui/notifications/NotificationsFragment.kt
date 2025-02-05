@@ -65,7 +65,7 @@ class NotificationsFragment : Fragment() {
                 binding.recyclerNotifications.visibility = View.VISIBLE
             } else {
                 binding.recyclerNotifications.visibility = View.GONE
-                Toast.makeText(requireContext(), "No notifications to display", Toast.LENGTH_SHORT).show()
+
             }
         })
         viewModel.fetchNotificationsInRealtime()

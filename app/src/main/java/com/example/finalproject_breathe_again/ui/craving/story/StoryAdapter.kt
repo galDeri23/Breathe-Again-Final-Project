@@ -18,7 +18,10 @@ class StoryAdapter(
 
         fun bind(story: Story) {
             binding.storyTitle.text = story.title
-            binding.storyAuthor.text = "By: ${story.author}"
+            binding.storyAuthor.text = buildString {
+                                        append("By: ")
+                                        append(story.author)
+                                        }
             binding.storyDate.text = story.date
             binding.movieLBLOverview.text = story.overview
             ImageLoader.getInstance().loadImage(
@@ -30,7 +33,7 @@ class StoryAdapter(
             if (story.isExpanded) {
                 binding.movieLBLOverview.maxLines = Int.MAX_VALUE
             } else {
-                binding.movieLBLOverview.maxLines = 3
+                binding.movieLBLOverview.maxLines = 2
             }
 
 
