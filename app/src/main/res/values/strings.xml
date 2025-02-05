@@ -36,4 +36,7 @@
     <string name="day_free">Day Free</string>
     <string name="save_money">Save Money</string>
     <string name="log_out">Log Out</string>
+    <string name="craving_management">Craving Management</string>
+    <string name="manage_your_cravings">Manage Your Cravings</string>
+    <string name="inspiring_stories">Inspiring Stories</string>
 </resources>

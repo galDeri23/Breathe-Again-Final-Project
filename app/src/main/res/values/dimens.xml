@@ -9,4 +9,14 @@
     <dimen name="height_button">80dp</dimen>
     <dimen name="iconSize">30dp</dimen>
     <dimen name="iconPadding_radius">12dp</dimen>
+    <dimen name="poster_width">120dp</dimen>
+    <dimen name="poster_height">150dp</dimen>
+    <dimen name="poster_margin">5dp</dimen>
+    <dimen name="default_corner_radius">20dp</dimen>
+    <dimen name="poster_elevation">10dp</dimen>
+    <dimen name="data_margin">5dp</dimen>
+    <dimen name="data_start_margin">85dp</dimen>
+    <dimen name="data_default_elevation">8dp</dimen>
+    <dimen name="story_title_size">18sp</dimen>
+    <dimen name="default_text_size">11sp</dimen>
 </resources>

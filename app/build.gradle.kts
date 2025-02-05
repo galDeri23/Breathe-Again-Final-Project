@@ -56,6 +56,9 @@ dependencies {
     implementation (libs.androidx.constraintlayout.v214)
     implementation (libs.material.v190)
 
+    //Glide
+    implementation (libs.glide)
+
     //Message scheduling
     implementation(libs.androidx.work.runtime.ktx)
     implementation (libs.androidx.work.runtime.ktx.v281)

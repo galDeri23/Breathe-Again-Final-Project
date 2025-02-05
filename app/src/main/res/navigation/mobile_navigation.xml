@@ -12,7 +12,6 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
 
-
     </fragment>
 
 
@@ -21,7 +20,9 @@
         android:name="com.example.finalproject_breathe_again.ui.craving.CravingFragment"
         android:label="@string/title_craving"
         tools:layout="@layout/fragment_craving">
-
+        <action
+            android:id="@+id/action_cravingFragment_to_storyFragment"
+            app:destination="@id/storyFragment"/>
 
     </fragment>
 
@@ -38,5 +39,11 @@
         android:name="com.example.finalproject_breathe_again.ui.share.ShareFragment"
         android:label="@string/title_share"
         tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/storyFragment"
+        android:name="com.example.finalproject_breathe_again.ui.craving.story.StoryFragment"
+        android:label="Inspiring Stories"
+        tools:layout="@layout/fragment_story" />
 
 </navigation>
