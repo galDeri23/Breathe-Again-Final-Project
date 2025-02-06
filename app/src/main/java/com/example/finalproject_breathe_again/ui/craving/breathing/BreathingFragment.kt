@@ -45,37 +45,11 @@ class BreathingFragment : Fragment() {
         isBreathing = true
         binding.lottieBreathing.playAnimation()
 
-        val cycleDuration = 8000L
-
-        handler.post(object : Runnable {
-            var step = 0
-            override fun run() {
-                if (!isBreathing) return
-
-                when (step) {
-                    0 -> binding.tvInstruction.text = buildString {
-                                    append("Inhale for 4 seconds")
-                                    }
-                    1 -> binding.tvInstruction.text = buildString {
-                                    append("Hold your breath for 7 seconds")
-                                    }
-                    2 -> binding.tvInstruction.text = buildString {
-                                    append("Exhale for 8 seconds")
-                                    }
-                }
-
-                step = (step + 1) % 3
-                handler.postDelayed(this, cycleDuration / 3)
-            }
-        })
     }
 
     private fun stopBreathingExercise() {
         isBreathing = false
         binding.lottieBreathing.pauseAnimation()
-        binding.tvInstruction.text = buildString {
-                            append("Breathing exercise stopped")
-                            }
         handler.removeCallbacksAndMessages(null)
     }
 

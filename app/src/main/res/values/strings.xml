@@ -45,4 +45,11 @@
     <string name="breathe_your_way_to_freedom">Breathe Your Way to Freedom</string>
     <string name="inspirational_stories">Inspirational Stories</string>
     <string name="all_achievements">All Achievements</string>
+    <string name="_05_00">05:00</string>
+    <string name="here_you_can_see_your_app_notifications">Here you can see your app notifications</string>
+    <string name="choose_puzzle">Choose Your Puzzle</string>
+    <string name="recycler_view_desc">Image selection for the puzzle</string>
+    <string name="restart">RESTART</string>
+    <string name="game_run_from_cigarette">Game Run From Cigarette</string>
+
 </resources>

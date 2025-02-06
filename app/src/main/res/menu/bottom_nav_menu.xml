@@ -21,7 +21,4 @@
         android:icon="@drawable/share"
         android:title="@string/title_share" />
 
-
-
-
 </menu>

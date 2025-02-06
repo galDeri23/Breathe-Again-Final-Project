@@ -32,17 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_instruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/inhale"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/lottie_breathing"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+
 
 
     <com.google.android.material.button.MaterialButton
@@ -51,7 +41,7 @@
         android:layout_height="wrap_content"
         android:text="@string/start_exercise"
         android:layout_margin="@dimen/defaultMargin"
-        app:layout_constraintTop_toBottomOf="@id/tv_instruction"
+        app:layout_constraintTop_toBottomOf="@id/lottie_breathing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -14,7 +14,7 @@
         android:id="@+id/tv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Here you can see your app notifications"
+        android:text="Here you can see your app notifications"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/black"

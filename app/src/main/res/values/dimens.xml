@@ -20,4 +20,10 @@
     <dimen name="story_title_size">18sp</dimen>
     <dimen name="default_text_size">11sp</dimen>
     <dimen name="width_height_lottie">400dp</dimen>
+    <dimen name="width_height_cigar">75dp</dimen>
+    <dimen name="width_height_currency">60dp</dimen>
+    <dimen name="heartDimens">40dp</dimen>
+    <dimen name="heartMargin">10dp</dimen>
+    <dimen name="defultMargin">3dp</dimen>
+    <dimen name="heartWidth">140dp</dimen>
 </resources>

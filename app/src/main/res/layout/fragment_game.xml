@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/box_cigarettes"
+    android:layoutDirection="ltr"
+    tools:context=".ui.craving.game.GameFragment">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/right_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/defaultMargin"
+        android:clickable="true"
+        android:importantForAccessibility="no"
+        android:src="@drawable/baseline_arrow_forward_24"
+        app:backgroundTint="@color/red"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/left_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/defaultMargin"
+        android:clickable="true"
+        android:importantForAccessibility="no"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:backgroundTint="@color/red"
+        app:tint="@color/white" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="000"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/hearts"
+        android:layout_width="@dimen/heartWidth"
+        android:layout_height="@dimen/heartDimens"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/defultMargin"
+        android:layout_marginRight="@dimen/defultMargin">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/hart1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/heartDimens"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/heart" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/hart2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/heartDimens"
+            android:layout_marginHorizontal="@dimen/heartMargin"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/heart" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/hart3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/heartDimens"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/heart" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <GridLayout
+        android:id="@+id/cigarettes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/hearts"
+        android:columnCount="3"
+        android:rowCount="5"
+        tools:ignore="NotSibling">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette00"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette01"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette02"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette10"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette11"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette12"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette20"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette21"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette22"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette30"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette31"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette32"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="3"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette40"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette41"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cigarette42"
+            android:layout_width="@dimen/width_height_cigar"
+            android:layout_height="@dimen/width_height_cigar"
+            android:layout_row="4"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/cigarette" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency00"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency01"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency02"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency10"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency11"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency12"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency20"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency21"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency22"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency30"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency31"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency32"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="3"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency40"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency41"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency42"
+            android:layout_width="@dimen/width_height_currency"
+            android:layout_height="@dimen/width_height_currency"
+            android:layout_row="4"
+            android:layout_column="2"
+            android:layout_margin="30dp"
+            app:srcCompat="@drawable/currency" />
+
+
+    </GridLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/guys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/left_arrow">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/guy1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="25dp"
+            app:srcCompat="@drawable/guy" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/guy2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="25dp"
+            app:srcCompat="@drawable/guy" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/guy3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="25dp"
+            app:srcCompat="@drawable/guy" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>

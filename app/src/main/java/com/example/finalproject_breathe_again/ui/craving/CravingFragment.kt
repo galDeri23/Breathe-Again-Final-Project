@@ -35,9 +35,9 @@ class CravingFragment : Fragment() {
             findNavController().navigate(R.id.action_cravingFragment_to_breathingFragment)
         }
 
-       // binding.buttonChallenge.setOnClickListener {
-          //  findNavController().navigate(R.id.action_cravingFragment_to_challengeFragment)
-      //  }
+        binding.btnChallenge.setOnClickListener {
+            findNavController().navigate(R.id.action_cravingFragment_to_gameFragment)
+       }
     }
 
     override fun onDestroyView() {
