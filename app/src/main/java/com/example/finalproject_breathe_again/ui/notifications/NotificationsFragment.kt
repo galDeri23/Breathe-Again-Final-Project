@@ -11,6 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject_breathe_again.databinding.FragmentNotificationsBinding
+import com.example.finalproject_breathe_again.utilities.DateUtilities
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NotificationsFragment : Fragment() {
 
@@ -54,18 +57,28 @@ class NotificationsFragment : Fragment() {
         viewModel.notifications.observe(viewLifecycleOwner, Observer { notifications ->
             Log.d("NotificationsFragment", "Received notifications: ${notifications.size}")
             notifications.forEach { notification ->
-                Log.d("NotificationsFragment", "Notification: title=${notification.title}, description=${notification.description}, date=${notification.date}")
+                Log.d(
+                    "NotificationsFragment",
+                    "Notification: title=${notification.title}, description=${notification.description}, date=${notification.date}"
+                )
             }
 
             if (!notifications.isNullOrEmpty()) {
-                val sortedNotifications = notifications.sortedByDescending { it.date }
-                notificationAdapter.updateNotifications(sortedNotifications)
 
-                notificationAdapter.updateNotifications(notifications)
+                val sortedNotifications = notifications.sortedByDescending {
+                    try {
+                        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                        dateFormat.parse(it.date) ?: Date(0)
+                    } catch (e: Exception) {
+                        Log.e("NotificationsFragment", "Error parsing date: ${e.message}")
+                        Date(0)
+                    }
+                }
+
+                notificationAdapter.updateNotifications(sortedNotifications)
                 binding.recyclerNotifications.visibility = View.VISIBLE
             } else {
                 binding.recyclerNotifications.visibility = View.GONE
-
             }
         })
         viewModel.fetchNotificationsInRealtime()

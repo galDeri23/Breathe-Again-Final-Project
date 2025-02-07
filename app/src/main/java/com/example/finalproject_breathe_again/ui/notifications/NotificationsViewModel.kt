@@ -41,7 +41,7 @@ class NotificationsViewModel : ViewModel() {
                 val notifications = querySnapshot.documents.mapNotNull { document ->
                     document.toObject(Notification::class.java)?.copy(
                         id = document.id,
-                        date = document.getString("date") ?: "Unknown date" // שימוש בתאריך מהמסמך
+                        date = document.getString("date") ?: "Unknown date"
                     )
                 }
                 _notifications.postValue(notifications)

@@ -47,76 +47,6 @@ class GameFragment : Fragment() {
         startTimer()
     }
 
-    private fun findViews(view: View) {
-        right_arrow = view.findViewById(R.id.right_arrow)
-        left_arrow = view.findViewById(R.id.left_arrow)
-        hearts = arrayOf(
-            view.findViewById(R.id.hart1),
-            view.findViewById(R.id.hart2),
-            view.findViewById(R.id.hart3)
-        )
-        cigarettes = arrayOf(
-            arrayOf(
-                view.findViewById(R.id.cigarette00),
-                view.findViewById(R.id.cigarette01),
-                view.findViewById(R.id.cigarette02)
-            ),
-            arrayOf(
-                view.findViewById(R.id.cigarette10),
-                view.findViewById(R.id.cigarette11),
-                view.findViewById(R.id.cigarette12)
-            ),
-            arrayOf(
-                view.findViewById(R.id.cigarette20),
-                view.findViewById(R.id.cigarette21),
-                view.findViewById(R.id.cigarette22)
-            ),
-            arrayOf(
-                view.findViewById(R.id.cigarette30),
-                view.findViewById(R.id.cigarette31),
-                view.findViewById(R.id.cigarette32)
-            ),
-            arrayOf(
-                view.findViewById(R.id.cigarette40),
-                view.findViewById(R.id.cigarette41),
-                view.findViewById(R.id.cigarette42)
-            )
-        )
-        guy = arrayOf(
-            view.findViewById(R.id.guy1),
-            view.findViewById(R.id.guy2),
-            view.findViewById(R.id.guy3)
-        )
-        score = view.findViewById(R.id.score)
-
-        currency00 = arrayOf(
-            arrayOf(
-                view.findViewById(R.id.currency00),
-                view.findViewById(R.id.currency01),
-                view.findViewById(R.id.currency02)
-            ),
-            arrayOf(
-                view.findViewById(R.id.currency10),
-                view.findViewById(R.id.currency11),
-                view.findViewById(R.id.currency12)
-            ),
-            arrayOf(
-                view.findViewById(R.id.currency20),
-                view.findViewById(R.id.currency21),
-                view.findViewById(R.id.currency22)
-            ),
-            arrayOf(
-                view.findViewById(R.id.currency30),
-                view.findViewById(R.id.currency31),
-                view.findViewById(R.id.currency32)
-            ),
-            arrayOf(
-                view.findViewById(R.id.currency40),
-                view.findViewById(R.id.currency41),
-                view.findViewById(R.id.currency42)
-            )
-        )
-    }
 
     private fun restartGame() {
         gameManager.resetGame()
@@ -169,6 +99,7 @@ class GameFragment : Fragment() {
     private fun updateUI() {
         updateBoys()
         updateCigarettes()
+        updateCurrency()
 
     }
     private fun checkCollisionCigarettes() {
@@ -244,6 +175,76 @@ class GameFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         stopTimer()
+    }
+    private fun findViews(view: View) {
+        right_arrow = view.findViewById(R.id.right_arrow)
+        left_arrow = view.findViewById(R.id.left_arrow)
+        hearts = arrayOf(
+            view.findViewById(R.id.hart1),
+            view.findViewById(R.id.hart2),
+            view.findViewById(R.id.hart3)
+        )
+        cigarettes = arrayOf(
+            arrayOf(
+                view.findViewById(R.id.cigarette00),
+                view.findViewById(R.id.cigarette01),
+                view.findViewById(R.id.cigarette02)
+            ),
+            arrayOf(
+                view.findViewById(R.id.cigarette10),
+                view.findViewById(R.id.cigarette11),
+                view.findViewById(R.id.cigarette12)
+            ),
+            arrayOf(
+                view.findViewById(R.id.cigarette20),
+                view.findViewById(R.id.cigarette21),
+                view.findViewById(R.id.cigarette22)
+            ),
+            arrayOf(
+                view.findViewById(R.id.cigarette30),
+                view.findViewById(R.id.cigarette31),
+                view.findViewById(R.id.cigarette32)
+            ),
+            arrayOf(
+                view.findViewById(R.id.cigarette40),
+                view.findViewById(R.id.cigarette41),
+                view.findViewById(R.id.cigarette42)
+            )
+        )
+        guy = arrayOf(
+            view.findViewById(R.id.guy1),
+            view.findViewById(R.id.guy2),
+            view.findViewById(R.id.guy3)
+        )
+        score = view.findViewById(R.id.score)
+
+        currency00 = arrayOf(
+            arrayOf(
+                view.findViewById(R.id.currency00),
+                view.findViewById(R.id.currency01),
+                view.findViewById(R.id.currency02)
+            ),
+            arrayOf(
+                view.findViewById(R.id.currency10),
+                view.findViewById(R.id.currency11),
+                view.findViewById(R.id.currency12)
+            ),
+            arrayOf(
+                view.findViewById(R.id.currency20),
+                view.findViewById(R.id.currency21),
+                view.findViewById(R.id.currency22)
+            ),
+            arrayOf(
+                view.findViewById(R.id.currency30),
+                view.findViewById(R.id.currency31),
+                view.findViewById(R.id.currency32)
+            ),
+            arrayOf(
+                view.findViewById(R.id.currency40),
+                view.findViewById(R.id.currency41),
+                view.findViewById(R.id.currency42)
+            )
+        )
     }
 }
 
