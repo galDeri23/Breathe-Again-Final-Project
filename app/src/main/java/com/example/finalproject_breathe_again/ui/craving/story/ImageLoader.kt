@@ -31,13 +31,13 @@ class ImageLoader private constructor(context: Context) {
     private val contextRef = WeakReference(context)
 
     fun loadImage(
-        source: Any, // יכול להיות URL או ID של משאב מקומי
+        source: Any,
         imageView: AppCompatImageView,
         placeholder: Int = R.drawable.ic_launcher_background
     ) {
         contextRef.get()?.let { context ->
             Glide.with(context)
-                .load(source) // Glide מזהה אוטומטית בין URL לבין משאב מקומי
+                .load(source)
                 .centerCrop()
                 .placeholder(placeholder)
                 .into(imageView)

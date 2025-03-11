@@ -63,7 +63,7 @@
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.example.finalproject_breathe_again.ui.craving.game.GameFragment"
-        android:label="Breathing Exercise"
+        android:label="Game"
         tools:layout="@layout/fragment_game" />
 
 

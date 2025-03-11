@@ -38,7 +38,7 @@ class StoryFragment : Fragment() {
 
     private fun setupRecyclerView() {
         storyAdapter = StoryAdapter { story ->
-            Toast.makeText(requireContext(), "Clicked: ${story.title}", Toast.LENGTH_SHORT).show()
+
         }
         binding.storyRVList.apply {
             layoutManager = LinearLayoutManager(requireContext())
