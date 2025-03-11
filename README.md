@@ -9,13 +9,13 @@ The app provides **breathing exercises, inspirational stories, and an interactiv
 
 ### **1️⃣ Login Screen**  
 📌 Sign in with **email, Google, or phone number**.  
-![screen_login](Images/screen_login.png)  
+![screen_login](Images/screen_login.jpg)  
 
 ---
 
 ### **2️⃣ Sign Up Screen**  
 📌 Create an account with **name, email, password, and quit date**.  
-![screen_signup](Images/screen_signup.png)  
+![screen_signUp](Images/screen_signUp.jpg)  
 
 ---
 
@@ -23,7 +23,7 @@ The app provides **breathing exercises, inspirational stories, and an interactiv
 📌 Displays **smoke-free days and money saved**.  
 📌 Includes a **Craving Button** for immediate support.  
 📌 Option to **share progress** with friends.  
-![screen_home](Images/screen_home.png)  
+![screen_home](Images/screen_home.jpg)  
 
 ---
 
@@ -32,35 +32,35 @@ The app provides **breathing exercises, inspirational stories, and an interactiv
 - **Breathing Exercises** to reduce stress.  
 - **Inspirational Stories** from ex-smokers.  
 - **Run from Cigarette Game** to distract yourself.  
-![screen_craving](Images/screen_craving.png)  
+![screen_craving](Images/screen_craving.jpg)  
 
 ---
 
 ### **5️⃣ Breathing Exercise**  
 📌 Guided breathing exercise to help manage stress.  
 📌 **Dynamic animation** to guide inhaling and exhaling.  
-![screen_breathing](Images/screen_breathing.png)  
+![screen_breathing](Images/screen_breathing.jpg)  
 
 ---
 
 ### **6️⃣ Inspirational Stories**  
 📌 **Real-life stories** from people who successfully quit smoking.  
 📌 Provides **motivation and encouragement** to continue.  
-![screen_story](Images/screen_story.png)  
+![screen_story](Images/screen_story.jpg)  
 
 ---
 
 ### **7️⃣ Run from Cigarette Game**  
 📌 A fun game where you **dodge cigarettes** and collect coins.  
 📌 Helps distract you when a craving hits.  
-![screen_game](Images/screen_game.png)  
+![screen_game](Images/screen_game.jpg)  
 
 ---
 
 ### **8️⃣ Notifications**  
 📌 Displays **motivational messages** from the app.  
 📌 Allows **deleting old notifications**.  
-![screen_notifications](Images/screen_notifications.png)  
+![screen_notification](Images/screen_notification.jpg)  
 
 ---
 
@@ -69,7 +69,8 @@ The app provides **breathing exercises, inspirational stories, and an interactiv
 ✅ **Craving Management** – Tools to handle cigarette cravings:  
    - **Breathing Exercises** to reduce stress.  
    - **Inspirational Stories** from people who quit smoking.  
-   - **Run from Cigarette Game** to distract yourself.  
+   - **Run from Cigarette Game** to distract yourself.
+
 ✅ **Motivational Messages** – Daily encouragement notifications.  
 ✅ **Progress Sharing** – Share your achievements with friends.  
 ✅ **Smart Notifications** – Get reminders and personalized messages.  
@@ -91,14 +92,18 @@ The app provides **breathing exercises, inspirational stories, and an interactiv
 To run the app locally, follow these steps:  
 
 1️⃣ Make sure you have **Android Studio** installed.  
+
 2️⃣ Clone the repository:  
    ```sh
    git clone https://github.com/your-username/breathe-again.git
    ```
 3️⃣ Open the project in Android Studio.
+
 4️⃣ Make sure the google-services.json file from Firebase is added to the app/ directory.
+
 5️⃣ Run the app on an emulator or a real device.
 
+---
 ## **Authors**
 
 - [Gal Deri](https://github.com/galDeri23)
