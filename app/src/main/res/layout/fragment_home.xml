@@ -128,7 +128,6 @@
         android:id="@+id/btn_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_500"
         android:text="@string/share_progress"
         android:textColor="@color/white"
         android:textStyle="bold"

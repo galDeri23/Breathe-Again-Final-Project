@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject_breathe_again.utilities.DateUtilities
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.concurrent.TimeUnit
+
 
 class HomeViewModel : ViewModel() {
 

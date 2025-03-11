@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
                 binding.tvDaysValue.text = days.toString()
 
 
-                val maxDays = 30
+                val maxDays = 365
                 binding.progressCircularDays.max = maxDays
 
 
@@ -62,13 +62,20 @@ class HomeFragment : Fragment() {
             }
 
             homeViewModel.moneySaved.observe(viewLifecycleOwner) { money ->
-                binding.tvMoneyValue.text = "$${String.format("%.2f", money)}"
+                val moneyInt = money.toInt()
+                binding.tvMoneyValue.text = "$$moneyInt"
 
-                val maxMoney = 1000
+                //change text size based on money saved
+                val textSizeMoney = when {
+                    moneyInt >= 10000 -> 14f
+                    moneyInt >= 1000 -> 18f
+                    else -> 24f
+                }
+                binding.tvMoneyValue.textSize = textSizeMoney
+
+                val maxMoney = 10000
                 binding.progressCircularMoney.max = maxMoney
-
-
-                binding.progressCircularMoney.progress = money.toInt().coerceAtMost(maxMoney)
+                binding.progressCircularMoney.progress = moneyInt.coerceAtMost(maxMoney)
             }
 
             homeViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
