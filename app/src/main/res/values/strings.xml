@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinalProject_Breathe_Again</string>
+    <string name="app_name">Breathe Again</string>
     <string name="title_home">Home</string>
     <string name="title_craving">Craving</string>
     <string name="title_share">Share</string>
@@ -19,7 +19,7 @@
     <string name="days_smoke_free">Days Smoke-Free:</string>
     <string name="money_saved">Money Saved:</string>
     <string name="craving">CRAVING</string>
-    <string name="smoke_free_progress">🚀 Smoke-Free Progress</string>
+    <string name="breathe_again_progress">🚀 Breathe Again Progress</string>
     <string name="_100">$100</string>
     <string name="share_progress">Share Progress</string>
     <string name="craving_button">craving button</string>
@@ -31,4 +31,25 @@
     <string name="delete_all">Delete All</string>
     <string name="notification_icon">Notification Icon</string>
     <string name="reminder">Reminder</string>
+    <string name="start_date">Start Date</string>
+    <string name="no_achievements_to_display">No achievements to display</string>
+    <string name="day_free">Day Free</string>
+    <string name="save_money">Save Money</string>
+    <string name="log_out">Log Out</string>
+    <string name="craving_management">Craving Management</string>
+    <string name="manage_your_cravings">Manage Your Cravings</string>
+    <string name="inspiring_stories">Inspiring Stories</string>
+    <string name="start_exercise">Start Exercise</string>
+    <string name="inhale">Inhale</string>
+    <string name="stop_exercise">stop exercise</string>
+    <string name="breathe_your_way_to_freedom">Breathe Your Way to Freedom</string>
+    <string name="inspirational_stories">Inspirational Stories</string>
+    <string name="all_achievements">All Achievements</string>
+    <string name="_05_00">05:00</string>
+    <string name="here_you_can_see_your_app_notifications">Here you can see your app notifications</string>
+    <string name="choose_puzzle">Choose Your Puzzle</string>
+    <string name="recycler_view_desc">Image selection for the puzzle</string>
+    <string name="restart">RESTART</string>
+    <string name="game_run_from_cigarette">Game Run From Cigarette</string>
+
 </resources>

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/gradient_background"
+    android:layoutDirection="ltr"
     android:padding="8dp">
 
 
@@ -11,11 +12,11 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="All Achievements"
+        android:text="@string/all_achievements"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@color/light_blue"
-        android:shadowColor="#000000"
+        android:textColor="@color/black"
+        android:shadowColor="@color/white"
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="4"
@@ -32,6 +33,17 @@
         android:scrollbars="vertical"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        tools:listitem="@layout/item_card"
+        tools:listitem="@layout/item_share"
         />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/no_achievements_to_display"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:textColor="@color/black" />
+
 </RelativeLayout>

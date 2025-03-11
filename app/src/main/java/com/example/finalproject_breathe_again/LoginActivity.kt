@@ -9,6 +9,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
 
@@ -47,7 +48,9 @@ class LoginActivity : AppCompatActivity() {
             signInWithPhone()
         }
         binding.loginSignup.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java).apply {
+                putExtra("isNewUser", true)
+            }
             startActivity(intent)
             finish()
         }
@@ -61,6 +64,7 @@ class LoginActivity : AppCompatActivity() {
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
+            .setIsSmartLockEnabled(false)
             .setLogo(R.drawable.logo)
             .build()
 
@@ -75,6 +79,7 @@ class LoginActivity : AppCompatActivity() {
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
+            .setIsSmartLockEnabled(false)
             .setLogo(R.drawable.logo)
             .build()
 
@@ -98,16 +103,29 @@ class LoginActivity : AppCompatActivity() {
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
-
             val user = FirebaseAuth.getInstance().currentUser
-            Toast.makeText(this, "Welcome, ${user?.displayName}!", Toast.LENGTH_SHORT).show()
+            val userId = user?.uid ?: return
 
+            val firestore = FirebaseFirestore.getInstance()
+            val userDoc = firestore.collection("users").document(userId)
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            userDoc.get().addOnSuccessListener { document ->
+                if (document.exists()) {
+
+                    startActivity(Intent(this, MainActivity::class.java))
+                } else {
+
+                    val intent = Intent(this, SignUpActivity::class.java).apply {
+                        putExtra("isNewUser", false)
+
+                    }
+                    startActivity(intent)
+                }
+
+            }.addOnFailureListener {
+                Toast.makeText(this, "Error fetching user data", Toast.LENGTH_LONG).show()
+            }
         } else {
-
             if (response == null) {
                 Toast.makeText(this, "Sign-in canceled", Toast.LENGTH_SHORT).show()
             } else {

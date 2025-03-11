@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_background"
+    tools:context=".ui.craving.breathing.BreathingFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_breathing_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/breathe_your_way_to_freedom"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_breathing"
+        android:layout_width="@dimen/width_height_lottie"
+        android:layout_height="@dimen/width_height_lottie"
+        app:lottie_rawRes="@raw/breathing_animation"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="false"
+        app:layout_constraintTop_toBottomOf="@id/tv_breathing_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_start_breathing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_exercise"
+        android:layout_margin="@dimen/defaultMargin"
+        app:layout_constraintTop_toBottomOf="@id/lottie_breathing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_stop_breathing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop_exercise"
+        android:layout_margin="@dimen/defaultMargin"
+        app:layout_constraintTop_toBottomOf="@id/btn_start_breathing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
