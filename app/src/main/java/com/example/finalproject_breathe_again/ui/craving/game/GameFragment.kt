@@ -54,6 +54,15 @@ class GameFragment : Fragment() {
         updateUI()
         startTimer()
     }
+    override fun onPause() {
+        super.onPause()
+        stopTimer()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopTimer()
+    }
 
     private fun startTimer() {
         if (!timerOn) {
@@ -79,6 +88,7 @@ class GameFragment : Fragment() {
             timerJob.cancel()
         }
     }
+
 
     private fun initViews() {
         right_arrow.setOnClickListener({ v -> moveRight() })
