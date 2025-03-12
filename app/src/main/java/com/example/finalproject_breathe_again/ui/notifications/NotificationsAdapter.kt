@@ -94,4 +94,5 @@ class NotificationsAdapter(
         Log.d("NotificationsAdapter", "Updated notifications: ${notificationsList.size}")
         notifyDataSetChanged()
     }
+
 }

@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject_breathe_again.databinding.FragmentNotificationsBinding
-import com.example.finalproject_breathe_again.utilities.DateUtilities
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,8 +39,24 @@ class NotificationsFragment : Fragment() {
 
         // Set delete all notifications button click
         binding.imgDeleteAll.setOnClickListener {
+            deleteAllNotifications()
             Toast.makeText(requireContext(), "Delete All feature coming soon!", Toast.LENGTH_SHORT).show()
         }
+    }
+    private fun deleteAllNotifications() {
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("notifications")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    document.reference.delete()
+                }
+                Log.d("Firestore", "All notifications deleted successfully")
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firestore", "Error deleting notifications", e)
+            }
     }
 
     private fun initRecyclerView() {
