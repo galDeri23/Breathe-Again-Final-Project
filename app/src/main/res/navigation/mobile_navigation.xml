@@ -66,5 +66,10 @@
         android:label="Game"
         tools:layout="@layout/fragment_game" />
 
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.example.finalproject_breathe_again.ui.chat.ChatBotFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_chat_bot" />
 
 </navigation>

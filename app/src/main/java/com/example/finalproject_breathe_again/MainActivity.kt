@@ -102,11 +102,11 @@ class MainActivity : AppCompatActivity() {
 
                         val notification = Notification(
                             id = "",
-                            title = if (isFirstLogin) "Welcome!" else "I'm glad you're back!",
+                            title = if (isFirstLogin) "Welcome!" else "Welcome Back!",
                             description = if (isFirstLogin) {
-                                "It's great that you joined the process! Getting started is the most important step 🚀"
+                                "We're so glad you're here – let's begin the journey to freedom 🚀"
                             } else {
-                                "I'm glad you're back! glad to see you again 😊"
+                                "Glad to see you again! Let's keep going together 💙"
                             },
                             date = DateUtilities.getCurrentDateAsString(),
                             userId = currentUser.uid
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                             onSuccess = {
                                 android.widget.Toast.makeText(
                                     applicationContext,
-                                    "A new message is waiting for you in the notifications screen",
+                                    "You have a new message in the Achievements screen",
                                     android.widget.Toast.LENGTH_LONG
                                 ).show()
                             },
@@ -135,11 +135,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun isToday(timestamp: Long): Boolean {
         val calendar = Calendar.getInstance()
         val today = Calendar.getInstance()
-
         calendar.timeInMillis = timestamp
 
         return calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
@@ -171,7 +169,6 @@ class MainActivity : AppCompatActivity() {
             workRequest
         )
     }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         return navController.navigateUp() || super.onSupportNavigateUp()

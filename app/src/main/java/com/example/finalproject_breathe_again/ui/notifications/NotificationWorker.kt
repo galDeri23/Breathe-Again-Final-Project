@@ -8,8 +8,7 @@ import com.example.finalproject_breathe_again.utilities.DateUtilities
 import com.example.finalproject_breathe_again.utilities.NotificationUtilities
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-
-
+import java.util.*
 
 class NotificationWorker(
     context: Context,
@@ -33,53 +32,71 @@ class NotificationWorker(
                     val startDate = document.getLong("startDate")
                     if (startDate != null) {
                         val daysFree = DateUtilities.calculateDaysBetween(startDate)
-                        val predefinedNotifications = listOf(
-                            Notification(
+
+                        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+                        val notification = when (hour) {
+                            in 6..9 -> Notification(
                                 id = "",
-                                title = "Keep Going!",
-                                description = "Well done, you've been breathing again for $daysFree days!",
-                                date = DateUtilities.getCurrentDateAsString(),
-                                userId = currentUser.uid
-                            ),
-                            Notification(
-                                id = "",
-                                title = "Reminder",
-                                description = "Remember to breathe deeply and stay calm!",
-                                date = DateUtilities.getCurrentDateAsString(),
-                                userId = currentUser.uid
-                            ),
-                            Notification(
-                                id = "",
-                                title = "Motivation",
-                                description = "You're stronger than the cravings. Keep it up!",
+                                title = "Good Morning ☀️",
+                                description = "A new day is a new opportunity – keep going smoke-free!",
                                 date = DateUtilities.getCurrentDateAsString(),
                                 userId = currentUser.uid
                             )
-                        )
 
-                        val randomNotification = predefinedNotifications.random()
+                            in 10..11, in 15..16 -> Notification(
+                                id = "",
+                                title = "Need a break?",
+                                description = "Feeling a craving? Let's handle this together! Try a breathing exercise or motivational quote.",
+                                date = DateUtilities.getCurrentDateAsString(),
+                                userId = currentUser.uid
+                            )
+
+                            in 12..14 -> Notification(
+                                id = "",
+                                title = "Set your daily goal 🎯",
+                                description = "Choose a small goal for today, like drinking water instead of smoking or practicing calm breathing.",
+                                date = DateUtilities.getCurrentDateAsString(),
+                                userId = currentUser.uid
+                            )
+
+                            in 21..23 -> Notification(
+                                id = "",
+                                title = "Daily Summary 📊",
+                                description = "Great job! You've been smoke-free for $daysFree days. Reflect on how you handled today 💪",
+                                date = DateUtilities.getCurrentDateAsString(),
+                                userId = currentUser.uid
+                            )
+
+                            else -> Notification(
+                                id = "",
+                                title = "Keep going!",
+                                description = "Every smoke-free moment makes you stronger. Proud of you! 💙",
+                                date = DateUtilities.getCurrentDateAsString(),
+                                userId = currentUser.uid
+                            )
+                        }
 
                         NotificationUtilities.sendNotification(
                             firestore = firestore,
-                            notification = randomNotification,
+                            notification = notification,
                             onSuccess = {
                                 android.os.Handler(android.os.Looper.getMainLooper()).post {
                                     android.widget.Toast.makeText(
                                         applicationContext,
-                                        "A new message is waiting for you in the notifications screen",
+                                        "You have a new message in the Achievements screen 📩",
                                         android.widget.Toast.LENGTH_LONG
                                     ).show()
                                 }
                             },
                             onFailure = {
-                                Log.e("NotificationWorker", "Error adding notification: ${it.message}")
+                                Log.e("NotificationWorker", "Failed to send notification: ${it.message}")
                             }
                         )
                     }
                 }
             },
             onFailure = {
-                Log.e("NotificationWorker", "Error fetching user document: ${it.message}")
+                Log.e("NotificationWorker", "Failed to fetch user document: ${it.message}")
             }
         )
 

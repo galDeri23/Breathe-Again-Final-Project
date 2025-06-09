@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import com.example.finalproject_breathe_again.utilities.DateUtilities
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class HomeViewModel : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
@@ -35,29 +34,25 @@ class HomeViewModel : ViewModel() {
         this.userId = userId
         val db = FirebaseFirestore.getInstance()
 
-        // Listener to track real-time updates from Firestore
         db.collection("users").document(userId).addSnapshotListener { document, exception ->
             if (exception != null) {
-                Log.e("HomeViewModel", "Error listening for updates: ${exception.message}")
+                Log.e("HomeViewModel", "Error: ${exception.message}")
                 _loading.value = false
                 return@addSnapshotListener
             }
 
             if (document != null && document.exists()) {
                 startDate = document.getLong("startDate") ?: 0L
-                dailyCigarettes = document.getLong("cigarettes")?.toInt() ?: 10 // Default to 10 cigarettes/day
-                costPerCigarette = document.getDouble("costPerCigarette") ?: 2.0 // Default price per cigarette
+                dailyCigarettes = document.getLong("cigarettes")?.toInt() ?: 10
+                costPerCigarette = document.getDouble("costPerCigarette") ?: 2.0
 
                 if (startDate == 0L) {
-                    Log.e("HomeViewModel", "Invalid start date in Firestore, setting default value")
-                    startDate = System.currentTimeMillis() // Fallback value
+                    startDate = System.currentTimeMillis()
                 }
 
-                // Update progress based on new data
                 updateProgress()
                 _loading.value = false
             } else {
-                Log.e("HomeViewModel", "Document does not exist")
                 _loading.value = false
             }
         }
@@ -72,10 +67,8 @@ class HomeViewModel : ViewModel() {
         if (startDate > 0) {
             val days = DateUtilities.calculateDaysBetween(startDate)
             _smokeFreeDays.value = days
-            Log.d("HomeViewModel", "Smoke-Free Days Calculated: $days")
         } else {
             _smokeFreeDays.value = 0
-            Log.e("HomeViewModel", "Failed to calculate smoke-free days: Invalid start date")
         }
     }
 
@@ -85,24 +78,15 @@ class HomeViewModel : ViewModel() {
             val savedMoney = days * dailyCigarettes * costPerCigarette
             _moneySaved.value = savedMoney
             saveMoneyToFirestore(savedMoney)
-            Log.d("HomeViewModel", "Money Saved Calculated: $savedMoney")
         } else {
             _moneySaved.value = 0.0
-            Log.e("HomeViewModel", "Failed to calculate money saved: Invalid data (days=$days, dailyCigarettes=$dailyCigarettes)")
         }
     }
 
     private fun saveMoneyToFirestore(savedMoney: Double) {
         val db = FirebaseFirestore.getInstance()
-
         db.collection("users").document(userId)
             .update("moneySaved", savedMoney)
-            .addOnSuccessListener {
-                Log.d("HomeViewModel", "Money saved successfully written to Firestore: $savedMoney")
-            }
-            .addOnFailureListener { exception ->
-                Log.e("HomeViewModel", "Failed to update money saved: ${exception.message}")
-            }
     }
 
     override fun onCleared() {

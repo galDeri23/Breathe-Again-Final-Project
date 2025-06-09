@@ -5,21 +5,23 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.finalproject_breathe_again.R
 import com.example.finalproject_breathe_again.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
-import android.provider.MediaStore
-import androidx.navigation.NavOptions
 
 class HomeFragment : Fragment() {
 
@@ -47,51 +49,32 @@ class HomeFragment : Fragment() {
             homeViewModel.loadUserData(userId)
 
             homeViewModel.smokeFreeDays.observe(viewLifecycleOwner) { days ->
-                binding.tvDaysValue.text = days.toString()
+                binding.tvDaysFree.text = "Smoke-free for $days days"
 
+                val months = days / 30
+                val daysToNextMedal = 30 - (days % 30)
 
-                val maxDays = 365
-                binding.progressCircularDays.max = maxDays
+                showMedals(months)
 
-
-                binding.progressCircularDays.progress = days.coerceAtMost(maxDays)
-
-                if (days >= maxDays) {
-                    Toast.makeText(context, "Congratulations! You've passed your goal!", Toast.LENGTH_SHORT).show()
+                binding.tvNextGoal.text = if (days % 30 == 0 && days > 0) {
+                    "🎉 You just earned a new medal!"
+                } else {
+                    "Next medal in $daysToNextMedal days"
                 }
             }
 
-            homeViewModel.moneySaved.observe(viewLifecycleOwner) { money ->
-                val moneyInt = money.toInt()
-                binding.tvMoneyValue.text = "$$moneyInt"
-
-                //change text size based on money saved
-                val textSizeMoney = when {
-                    moneyInt >= 10000 -> 14f
-                    moneyInt >= 1000 -> 18f
-                    else -> 24f
-                }
-                binding.tvMoneyValue.textSize = textSizeMoney
-
-                val maxMoney = 10000
-                binding.progressCircularMoney.max = maxMoney
-                binding.progressCircularMoney.progress = moneyInt.coerceAtMost(maxMoney)
-            }
+            // גם אם לא מוצגים, נשמר בשביל שיתוף
+            homeViewModel.moneySaved.observe(viewLifecycleOwner) {}
 
             homeViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
                 binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
             }
 
             binding.btnCraving.setOnClickListener {
-                findNavController().navigate(
-                    R.id.navigation_craving,
-                    null,
-                    NavOptions.Builder()
-                        .setPopUpTo(R.id.navigation_home, inclusive = false)
-                        .build()
-                )
+                findNavController().navigate(R.id.breathingFragment)
             }
-            binding.btnShare.setOnClickListener {
+
+            binding.fabShare.setOnClickListener {
                 val days = homeViewModel.smokeFreeDays.value ?: 0
                 val money = homeViewModel.moneySaved.value ?: 0.0
 
@@ -101,42 +84,30 @@ class HomeFragment : Fragment() {
                     showShareOptions()
                 }
             }
-            binding.imgReset.setOnClickListener {
-                val currentUser = FirebaseAuth.getInstance().currentUser
-                if (currentUser != null) {
-                    val userId = currentUser.uid
-                    val db = FirebaseFirestore.getInstance()
+        }
+    }
 
+    private fun showMedals(monthsFree: Int) {
+        val medalContainer = binding.medalContainer
+        medalContainer.removeAllViews()
 
-                    val resetData = mapOf(
-                        "startDate" to System.currentTimeMillis(),
-                        "moneySaved" to 0.0
-                    )
+        for (i in 1..monthsFree.coerceAtMost(12)) {
+            val imageView = ImageView(requireContext())
+            imageView.setImageResource(R.drawable.medal)
 
-                    db.collection("users").document(userId).update(resetData)
-                        .addOnSuccessListener {
+            val sizePx = (48 * resources.displayMetrics.density).toInt()
+            val params = LinearLayout.LayoutParams(sizePx, sizePx)
+            params.setMargins(8, 0, 8, 0)
+            imageView.layoutParams = params
 
-                            homeViewModel.loadUserData(userId)
-                            Toast.makeText(context, "Data reset successfully!", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(context, "Failed to reset data: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
-                } else {
-                    Toast.makeText(context, "User not logged in!", Toast.LENGTH_SHORT).show()
-                }
-            }
-        } else {
-            Toast.makeText(context, "User not logged in!", Toast.LENGTH_SHORT).show()
-            //  findNavController().navigate(R.id.action_home_to_login)
+            medalContainer.addView(imageView)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null) {
-            homeViewModel.loadUserData(currentUser.uid)
+        FirebaseAuth.getInstance().currentUser?.uid?.let {
+            homeViewModel.loadUserData(it)
         }
     }
 
@@ -145,26 +116,26 @@ class HomeFragment : Fragment() {
         val money = homeViewModel.moneySaved.value ?: 0.0
 
         val options = arrayOf("Share on Social Media", "Share in App")
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Choose Sharing Option")
-        builder.setItems(options) { _, which ->
-            when (which) {
-                0 -> shareOnSocialMedia(days, money)
-                1 -> shareInApp(days, money)
+        AlertDialog.Builder(requireContext())
+            .setTitle("Choose Sharing Option")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> shareOnSocialMedia(days)
+                    1 -> shareInApp(days)
+                }
             }
-        }
-        builder.show()
+            .show()
     }
 
-    private fun shareOnSocialMedia(days: Int, money: Double) {
-        val shareText = "I've been breathe again for $days days and saved $${String.format("%.2f", money)}! Join me in this journey!"
+    private fun shareOnSocialMedia(days: Int) {
+        val shareText = "I've been smoke-free for $days days! 🎖️ Join me on my journey!"
 
-        val bitmap = createGraphBitmap()
+        val bitmap = createMedalsBitmap()
 
         val path = MediaStore.Images.Media.insertImage(
             requireContext().contentResolver,
             bitmap,
-            "Smoke-Free Progress",
+            "My Smoke-Free Medals",
             null
         )
 
@@ -180,60 +151,46 @@ class HomeFragment : Fragment() {
         startActivity(Intent.createChooser(intent, "Share your progress"))
     }
 
-
-    private fun createGraphBitmap(): Bitmap {
-        //function to create a bitmap of the graph
-        val view = binding.progressCircularDays
+    private fun createMedalsBitmap(): Bitmap {
+        val view = binding.medalContainer
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap
     }
 
-    private fun shareInApp(days: Int, money: Double) {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null) {
-            val userId = currentUser.uid
-            val db = FirebaseDatabase.getInstance().getReference("shareItems")
+    private fun shareInApp(days: Int) {
+        val currentUser = FirebaseAuth.getInstance().currentUser ?: return
+        val userId = currentUser.uid
+        val db = FirebaseDatabase.getInstance().getReference("shareItems")
 
-            val userRef = FirebaseFirestore.getInstance().collection("users").document(userId)
+        val userRef = FirebaseFirestore.getInstance().collection("users").document(userId)
 
-            userRef.get().addOnSuccessListener { document ->
-                val username = document.getString("name") ?: "Anonymous"
+        userRef.get().addOnSuccessListener { document ->
+            val username = document.getString("name") ?: "Anonymous"
 
-                if (days > 0) {
-                    val shareData = mapOf(
-                        "userId" to userId,
-                        "username" to username,
-                        "daysFree" to days,
-                        "moneySaved" to money,
-                        "progressGraph" to calculateProgressPercentage(days),
-                        "timestamp" to System.currentTimeMillis()
-                    )
+            val medals = days / 30
+            val shareData = mapOf(
+                "userId" to userId,
+                "username" to username,
+                "daysFree" to days,
+                "medalsEarned" to medals,
+                "message" to "I've earned $medals medal(s) for being smoke-free for $days days! 🎖️",
+                "timestamp" to System.currentTimeMillis()
+            )
 
-                    db.push().setValue(shareData)
-                        .addOnSuccessListener {
-                            Toast.makeText(context, "Shared successfully!", Toast.LENGTH_SHORT).show()
-                            findNavController().navigate(R.id.navigation_share)
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(context, "Failed to share: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
-                } else {
-                    Toast.makeText(context, "No valid progress to share.", Toast.LENGTH_SHORT).show()
+            db.push().setValue(shareData)
+                .addOnSuccessListener {
+                    Toast.makeText(context, "Shared successfully!", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.navigation_share)
                 }
-            }.addOnFailureListener { e ->
-                Toast.makeText(context, "Failed to fetch user data: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            Toast.makeText(context, "User not logged in!", Toast.LENGTH_SHORT).show()
+                .addOnFailureListener { e ->
+                    Toast.makeText(context, "Failed to share: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+
+        }.addOnFailureListener { e ->
+            Toast.makeText(context, "Failed to fetch user data: ${e.message}", Toast.LENGTH_SHORT).show()
         }
-    }
-
-
-    private fun calculateProgressPercentage(days: Int): Int {
-        val maxDays = binding.progressCircularDays.max
-        return (days * 100) / maxDays
     }
 
     override fun onDestroyView() {
